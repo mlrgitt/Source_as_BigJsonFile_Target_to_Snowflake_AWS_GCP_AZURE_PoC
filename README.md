@@ -24,19 +24,26 @@ This project demonstrates a **production-grade, multi-cloud data engineering pip
 ## 🏗️ Architecture
 
 ```
-Sources (JSON / Unstructured)
-        ↓
-S3 / GCS / ADLS
-        ↓
-Snowpipe (Auto Ingest)
-        ↓
-Raw Table (VARIANT)
-        ↓
-Stream + Task (CDC)
-        ↓
-Silver Table (Structured)
-        ↓
-BI / GenAI / Chatbot
+          +----------------------+
+          |   JSON (20GB Files)  |
+          +----------+-----------+
+                     |
+      +--------------+--------------+
+      |       Cloud Storage         |
+      |  (S3 / GCS / ADLS)         |
+      +--------------+--------------+
+                     |
+               Snowpipe
+                     |
+              Raw Table (VARIANT)
+                     |
+           Stream + Task (CDC)
+                     |
+              Silver Table
+                     |
+        +------------+------------+
+        |                         |
+     BI Tools                 GenAI Chatbot
 ```
 
 ---
